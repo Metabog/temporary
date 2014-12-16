@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    
+      <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Welcome</title>
+
+{% javascripts '@OKMixOkBundle/Resources/public/js/vendor/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% javascripts '@OKMixOkBundle/Resources/public/js/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% javascripts '@OKMixOkBundle/Resources/public/js/foundation/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+{% stylesheets '@OKMixOkBundle/Resources/public/css/*' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+
+  </head>
+
+    </head>
+    <body>
+
+     <!-- Top bar
+      -->
+
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">MixOK</a></h1>
+    </li>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+
+
+    {% if app.user %}
+      <li class="active"><a href="/logout">Log Out</a></li>
+
+    {% elseif not app.user %}
+      <li class="active"><a href="/login">Log In</a></li>
+      <li class="active"><a href="/register">Register</a></li>
+    {% endif %}
+ww
+
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+        {% if app.user %}
+
+
+<a href="#" data-reveal-id="uploadmodal" class="radius button">Upload</a>
+
+
+<div id="uploadmodal" class="reveal-modal" data-reveal>
+  <h2>Upload a song.</h2>
+  <p class="lead">Select an mp3 file.</p>
+
+  <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+
+<form action="/upload" method="post" enctype="multipart/form-data">
+  <div class="row collapse">
+    <div class="small-9 large-10 columns">
+      <input type="text" placeholder="Song Name" name = "title">
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <div class="small-10 columns">
+          <input type="file" name = "file">
+        </div>
+      </div>
+    </div>
+  </div>
+
+<input type="submit" class="button" value="Input Submit Button" />
+
+</form>
+
+  <a class="close-reveal-modal">&#215;</a>
+
+</div>
+
+          {% endif %}
+    </ul>
+  </section>
+</nav>
+
+        {% block body %}{% endblock %}
+
+    </body>
+
+    <script>
+      $(document).foundation();
+    </script>
+
+</html>
